@@ -12,10 +12,11 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import me.risky.jlike.R.layout;
 import me.risky.jlike.bean.WelfareDetail;
-import me.risky.jlike.controller.NewsDetailController_;
 import me.risky.jlike.dao.WelfareDao_;
 import org.androidannotations.api.BackgroundExecutor;
 import org.androidannotations.api.view.HasViews;
@@ -57,7 +58,6 @@ public final class NewsDetailFragment_
 
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
-        controller = NewsDetailController_.getInstance_(getActivity());
         welfareDao = WelfareDao_.getInstance_(getActivity());
     }
 
@@ -74,21 +74,9 @@ public final class NewsDetailFragment_
     @Override
     public void onViewChanged(HasViews hasViews) {
         listview = ((ListView) hasViews.findViewById(me.risky.jlike.R.id.listview));
+        progressBar = ((ProgressBar) hasViews.findViewById(me.risky.jlike.R.id.progressBar));
+        reLoadImage = ((ImageView) hasViews.findViewById(me.risky.jlike.R.id.reLoadImage));
         afterInject();
-    }
-
-    @Override
-    public void loadError() {
-        handler_.post(new Runnable() {
-
-
-            @Override
-            public void run() {
-                NewsDetailFragment_.super.loadError();
-            }
-
-        }
-        );
     }
 
     @Override
@@ -99,6 +87,34 @@ public final class NewsDetailFragment_
             @Override
             public void run() {
                 NewsDetailFragment_.super.loadSuccess(list);
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void loadFinish() {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                NewsDetailFragment_.super.loadFinish();
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void loadError() {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                NewsDetailFragment_.super.loadError();
             }
 
         }

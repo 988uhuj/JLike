@@ -21,6 +21,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -174,13 +175,9 @@ public class MainActivity extends BaseFragmentActivity{
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-//		MenuInflater menuInflater = getMenuInflater();
-//		menuInflater.inflate(R.menu.main, menu);
-//		MenuItem menuItem = menu.findItem(R.id.action_bar_more);
-//		MenuItem menuRefreshItem = menu.findItem(R.id.action_bar_refresh);
-//		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-//		MenuItemCompat.setShowAsAction(menuRefreshItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-		return true;
+		MenuInflater inflater = getSupportMenuInflater();  
+        inflater.inflate(R.menu.main, menu);  
+        return true;  
 	}
 	private void switchFragment(Fragment fragment) {
 		

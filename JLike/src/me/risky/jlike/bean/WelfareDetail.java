@@ -5,6 +5,7 @@ public class WelfareDetail {
 	private String content;
 	private String tag;
 	private String imgSrc;
+	private boolean isGifImg;
 	
 	private int type;
 	public String getTitle() {
@@ -36,6 +37,12 @@ public class WelfareDetail {
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+	public boolean isGifImg() {
+		return isGifImg;
+	}
+	public void setGifImg(boolean isGifImg) {
+		this.isGifImg = isGifImg;
 	}
 	
 	

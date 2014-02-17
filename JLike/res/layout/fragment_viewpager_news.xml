@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <com.astuetz.viewpager.extensions.PagerSlidingTabStrip
+    <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:background="@color/white"
         android:layout_width="match_parent"

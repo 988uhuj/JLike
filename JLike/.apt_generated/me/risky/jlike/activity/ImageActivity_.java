@@ -14,11 +14,13 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import me.risky.jlike.R.id;
 import me.risky.jlike.R.layout;
 import org.androidannotations.api.view.HasViews;
 import org.androidannotations.api.view.OnViewChangedListener;
 import org.androidannotations.api.view.OnViewChangedNotifier;
+import pl.droidsonroids.gif.GifImageView;
 
 public final class ImageActivity_
     extends ImageActivity
@@ -69,10 +71,13 @@ public final class ImageActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
+        typeTV = ((TextView) hasViews.findViewById(id.type));
         backBtn = ((ImageView) hasViews.findViewById(id.back));
+        gifImageView = ((GifImageView) hasViews.findViewById(id.gifImage));
+        titleTV = ((TextView) hasViews.findViewById(id.title));
         downLoadBtn = ((ImageView) hasViews.findViewById(id.download));
-        progressBar = ((ProgressBar) hasViews.findViewById(id.loading));
         imageView = ((ImageView) hasViews.findViewById(id.image));
+        progressBar = ((ProgressBar) hasViews.findViewById(id.loading));
         afterInject();
     }
 

@@ -6,7 +6,6 @@
 package me.risky.jlike.controller;
 
 import android.content.Context;
-import org.androidannotations.api.BackgroundExecutor;
 
 public final class NewsDetailController_
     extends NewsDetailController
@@ -30,24 +29,6 @@ public final class NewsDetailController_
     public void rebind(Context context) {
         context_ = context;
         init_();
-    }
-
-    @Override
-    public void load(final String url) {
-        BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
-
-
-            @Override
-            public void execute() {
-                try {
-                    NewsDetailController_.super.load(url);
-                } catch (Throwable e) {
-                    Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                }
-            }
-
-        }
-        );
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import me.risky.jlike.bean.WelfareDetail;
 import me.risky.jlike.bean.WelfareItem;
 import me.risky.jlike.util.Constants;
+import me.risky.library.base.ImageUtil;
 
 import org.androidannotations.annotations.EBean;
 import org.jsoup.Jsoup;
@@ -82,6 +83,9 @@ public class WelfareDao {
 					
 					detail = new WelfareDetail();
 					detail.setImgSrc(imgSrc);
+					if(ImageUtil.isGIF(imgSrc)){	//设置图片类型
+						detail.setGifImg(true);
+					}
 					detail.setType(Constants.DEF_WELFARE_DETAIL.IMG);
 					list.add(detail);
 				}

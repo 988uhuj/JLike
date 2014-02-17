@@ -2,41 +2,81 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    >
+    android:background="@color/black" >
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        />
+        android:layout_gravity="center" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
     <ProgressBar
         android:id="@+id/loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="visible" />
-    <FrameLayout 
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:background="@color/transparentblack"
-        >
+        android:background="@color/transparentblack" >
+
         <ImageView
             android:id="@+id/back"
-       	    android:layout_width="wrap_content"
-       	    android:layout_height="wrap_content"
-       	    android:src="@drawable/back_btn"/>
-       	<ImageView 
-       	    android:id="@+id/download"
-       	    android:layout_width="wrap_content"
-       	    android:layout_height="wrap_content"
-       	    android:layout_gravity="right|center_vertical"
-       	    android:layout_marginRight="16dp"
-       	    android:focusable="true"
-       	    android:clickable="true"
-       	    android:src="@drawable/download_btn"/>
-    </FrameLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_btn" />
 
+        <ImageView
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/download_btn" />
+
+        <!--
+                <ProgressBar
+       	    android:id="@+id/loading"
+       	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_toLeftOf="@+id/download"
+       	    style="?android:attr/progressBarStyleSmall"
+       	    android:layout_centerVertical="true"
+       	    android:layout_marginRight="16dp"
+       	    android:visibility="visible" />
+        -->
+        
+         <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="@color/white"
+        android:padding="8dp"
+        android:textSize="16sp" />
 </FrameLayout>

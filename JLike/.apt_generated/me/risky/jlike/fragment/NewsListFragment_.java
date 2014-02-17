@@ -57,8 +57,8 @@ public final class NewsListFragment_
 
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
-        welfareDao = WelfareDao_.getInstance_(getActivity());
         page = Page_.getInstance_(getActivity());
+        welfareDao = WelfareDao_.getInstance_(getActivity());
     }
 
     @Override

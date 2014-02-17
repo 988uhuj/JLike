@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Window;
 
 public class BaseFragmentActivity extends SherlockFragmentActivity{
 
@@ -14,10 +15,13 @@ public class BaseFragmentActivity extends SherlockFragmentActivity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		bar = getSupportActionBar();
 		bar.setTitle("OSChina");
 		bar.setDisplayHomeAsUpEnabled(true);
+		
+		hideRefresh();
 	}
 
 	
@@ -42,4 +46,12 @@ public class BaseFragmentActivity extends SherlockFragmentActivity{
 		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	}
 	
+	
+	public void showRefresh(){
+		setSupportProgressBarIndeterminateVisibility(true);	
+	}
+	
+	public void hideRefresh(){
+		setSupportProgressBarIndeterminateVisibility(false);	
+	}
 }

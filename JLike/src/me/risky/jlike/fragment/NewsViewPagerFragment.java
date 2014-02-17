@@ -11,7 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
+import com.astuetz.PagerSlidingTabStrip;
+
 
 public class NewsViewPagerFragment extends BaseFragment{
 	
@@ -44,7 +45,7 @@ public class NewsViewPagerFragment extends BaseFragment{
 		tabs = (PagerSlidingTabStrip) getView().findViewById(R.id.tabs);
 		
 		viewPager.setAdapter(mainPagerAdapter);
-		tabs.setCurrentTextColorResource(R.color.tab_color);
+//		tabs.setCurrentTextColorResource(R.color.tab_color);
 		tabs.setTextColorResource(R.color.tab_color_uncheck);
 		tabs.setUnderlineHeight((int) getResources().getDimension(R.dimen.sliding_underlineHeight));
 		tabs.setIndicatorHeight((int) getResources().getDimension(R.dimen.sliding_indicatorHeight));

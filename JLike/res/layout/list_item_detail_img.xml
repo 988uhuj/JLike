@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:scaleType="fitXY"
-            android:src="@drawable/t3"
             />
 
         <TextView
@@ -31,12 +30,12 @@
             android:layout_alignBottom="@+id/imageView"
             android:layout_alignLeft="@+id/imageView"
             android:background="@color/tab_color"
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="4dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="2dp"
             android:text="GIF"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
 </RelativeLayout>

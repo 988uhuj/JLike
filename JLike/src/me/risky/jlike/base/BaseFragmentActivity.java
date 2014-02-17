@@ -18,7 +18,7 @@ public class BaseFragmentActivity extends SherlockFragmentActivity{
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		bar = getSupportActionBar();
-		bar.setTitle("OSChina");
+		bar.setTitle("JLike");
 		bar.setDisplayHomeAsUpEnabled(true);
 		
 		hideRefresh();

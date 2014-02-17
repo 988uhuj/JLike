@@ -51,4 +51,5 @@
       <color name="tab_color_uncheck">#333333</color>
       
       <color name="title">#333333</color>
+      <color name="content">#8fadad</color>
 </resources>

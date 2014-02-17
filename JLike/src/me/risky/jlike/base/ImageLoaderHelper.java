@@ -20,9 +20,9 @@ public class ImageLoaderHelper {
 	public ImageLoaderHelper(Context context){
 		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 		options = new DisplayImageOptions.Builder()
-				.showImageOnLoading(R.drawable.app_icon)
-				.showImageForEmptyUri(R.drawable.app_icon)
-				.showImageOnFail(R.drawable.app_icon).cacheInMemory(true).cacheOnDisc(true)
+				.showImageOnLoading(R.drawable.default_app)
+				.showImageForEmptyUri(R.drawable.default_app)
+				.showImageOnFail(R.drawable.default_app).cacheInMemory(true).cacheOnDisc(true)
 				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
 				.displayer(new RoundedBitmapDisplayer(20))
 				.displayer(new FadeInBitmapDisplayer(300)).build();

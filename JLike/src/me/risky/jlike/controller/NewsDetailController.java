@@ -93,7 +93,7 @@ public class NewsDetailController extends AbsBaseItemController{
 				holder.textView.setText(Html.fromHtml(detail.getContent(), null, new MyTagHandler()));
 				break;
 			case Constants.DEF_WELFARE_DETAIL.TAG:
-				holder.textView.setText(Html.fromHtml(detail.getTag(), null, new MyTagHandler()));
+				holder.textView.setText(detail.getTag());
 				break;
 			default:
 				break;

@@ -32,8 +32,11 @@ public class WelfareDao {
 				// Title
 				Element title = article.getElementsByTag("header").get(0);
 				String titleStr = title.text();
-				Log.d("WelfareDao", "titleSrc" + imgSrc);
-				Log.d("WelfareDao", "titleSrc" + title.text());
+				// Date
+				Element p = article.getElementsByTag("p").get(0);
+				Element time = p.getElementsByTag("span").get(1);
+				String date = time.text();
+				
 				// Content 
 				Element content = article.getElementsByClass("note").get(0);
 				String contentStr = content.ownText();
@@ -47,6 +50,7 @@ public class WelfareDao {
 				item.setTitle(titleStr);
 				item.setContent(contentStr);
 				item.setDetailUrl(detailUrl);
+				item.setDateTime(date);
 				list.add(item);
 			}
 		} catch (Exception e) {
@@ -69,6 +73,14 @@ public class WelfareDao {
 			WelfareDetail detail = new WelfareDetail();
 			detail.setTitle(titleStr);
 			detail.setType(Constants.DEF_WELFARE_DETAIL.TITLE);
+			list.add(detail);
+			
+			Element time = title.getElementsByTag("time").get(0);
+			String date = time.text();
+			Log.d("time", date);
+			detail = new WelfareDetail();
+			detail.setTag(date);
+			detail.setType(Constants.DEF_WELFARE_DETAIL.TAG);
 			list.add(detail);
 			
 			Element articleContent = content.getElementsByClass("article-content").get(0);

@@ -2,7 +2,7 @@
     android:id="@+id/newsContentView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/wangyibg"
+    android:background="@color/white"
     android:clickable="true" >
 
     <ListView
@@ -17,7 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        style="?android:attr/progressBarStyleLarge"
         android:visibility="visible" />
 
     <ImageView
@@ -26,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:clickable="true"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/default_app"
         android:visibility="invisible" />
 
 </RelativeLayout>

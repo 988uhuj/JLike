@@ -44,7 +44,6 @@
                 android:layout_marginBottom="6dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="6dp"
-                android:src="@drawable/app_icon"
                 android:visibility="visible" />
 
             <LinearLayout

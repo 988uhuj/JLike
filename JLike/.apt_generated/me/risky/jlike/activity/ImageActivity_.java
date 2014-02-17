@@ -71,13 +71,13 @@ public final class ImageActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
+        progressBar = ((ProgressBar) hasViews.findViewById(id.loading));
+        titleTV = ((TextView) hasViews.findViewById(id.title));
+        imageView = ((ImageView) hasViews.findViewById(id.image));
         typeTV = ((TextView) hasViews.findViewById(id.type));
         backBtn = ((ImageView) hasViews.findViewById(id.back));
-        gifImageView = ((GifImageView) hasViews.findViewById(id.gifImage));
-        titleTV = ((TextView) hasViews.findViewById(id.title));
         downLoadBtn = ((ImageView) hasViews.findViewById(id.download));
-        imageView = ((ImageView) hasViews.findViewById(id.image));
-        progressBar = ((ProgressBar) hasViews.findViewById(id.loading));
+        gifImageView = ((GifImageView) hasViews.findViewById(id.gifImage));
         afterInject();
     }
 

@@ -42,7 +42,7 @@ public class NewsItemController extends AbsBaseItemController{
 			Log.d("Jlike", welfareItem.getTitle());
 			holder.title.setText(welfareItem.getTitle());
 			holder.content.setText(welfareItem.getContent());
-//			holder.date.setText(newsItem.getDate());
+			holder.date.setText(welfareItem.getDateTime());
 			if(welfareItem.getImgSrc() != null){
 				imageLoaderHelper.display(welfareItem.getImgSrc(), holder.newsImg);
 				holder.newsImg.setVisibility(View.VISIBLE);

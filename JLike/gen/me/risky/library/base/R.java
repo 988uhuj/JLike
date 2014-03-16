@@ -11,7 +11,7 @@ public final class R {
 		public static final int activity_horizontal_margin = 0x7f080011;
 	}
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f02008b;
+		public static final int ic_launcher = 0x7f020099;
 	}
 	public static final class style {
 		public static final int AppBaseTheme = 0x7f0b0059;

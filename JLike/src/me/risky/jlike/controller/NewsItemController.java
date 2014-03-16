@@ -4,7 +4,7 @@ import me.risky.jlike.R;
 import me.risky.jlike.base.AbsBaseItemController;
 import me.risky.jlike.base.ImageLoaderHelper;
 import me.risky.jlike.base.OnItemClickListener;
-import me.risky.jlike.bean.WelfareItem;
+import me.risky.jlike.db.News;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -38,13 +38,13 @@ public class NewsItemController extends AbsBaseItemController{
 			holder = (ViewHolder) convertView.getTag();
 		}
 		if (null != item) {
-			final WelfareItem welfareItem = (WelfareItem) item;
-			Log.d("Jlike", welfareItem.getTitle());
-			holder.title.setText(welfareItem.getTitle());
-			holder.content.setText(welfareItem.getContent());
-			holder.date.setText(welfareItem.getDateTime());
-			if(welfareItem.getImgSrc() != null){
-				imageLoaderHelper.display(welfareItem.getImgSrc(), holder.newsImg);
+			final News news = (News) item;
+			Log.d("Jlike", news.getTitle());
+			holder.title.setText(news.getTitle());
+			holder.content.setText(news.getContent());
+			holder.date.setText(news.getDateTime());
+			if(news.getImageSrc() != null){
+				imageLoaderHelper.display(news.getImageSrc(), holder.newsImg);
 				holder.newsImg.setVisibility(View.VISIBLE);
 			}else{
 				holder.newsImg.setVisibility(View.GONE);
@@ -55,7 +55,7 @@ public class NewsItemController extends AbsBaseItemController{
 				@Override
 				public void onClick(View v) {
 					if(onClickListener != null){
-						onClickListener.onItemClick(p, welfareItem);
+						onClickListener.onItemClick(p, news);
 					}
 				}
 			});
@@ -73,9 +73,9 @@ public class NewsItemController extends AbsBaseItemController{
 		ImageView newsImg;
 	}
 	
-	private OnItemClickListener<WelfareItem> onClickListener;
+	private OnItemClickListener<News> onClickListener;
 	
-	public void setOnItemClickListener(OnItemClickListener<WelfareItem> onClickListener){
+	public void setOnItemClickListener(OnItemClickListener<News> onClickListener){
 		this.onClickListener = onClickListener;
 	}
 	

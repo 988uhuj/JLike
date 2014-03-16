@@ -9,11 +9,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import me.risky.jlike.R.layout;
+import me.risky.jlike.db.News;
+import org.androidannotations.api.BackgroundExecutor;
 import org.androidannotations.api.SdkVersionHelper;
 import org.androidannotations.api.view.HasViews;
 import org.androidannotations.api.view.OnViewChangedListener;
@@ -25,6 +29,7 @@ public final class DetailActivity_
 {
 
     private final OnViewChangedNotifier onViewChangedNotifier_ = new OnViewChangedNotifier();
+    private Handler handler_ = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +80,71 @@ public final class DetailActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        afterInject();
+        afterView();
+    }
+
+    @Override
+    public void checkHasCollectedFinish() {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                DetailActivity_.super.checkHasCollectedFinish();
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void saveCollectFinish() {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                DetailActivity_.super.saveCollectFinish();
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void saveCollect() {
+        BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
+
+
+            @Override
+            public void execute() {
+                try {
+                    DetailActivity_.super.saveCollect();
+                } catch (Throwable e) {
+                    Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
+                }
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void checkHasCollected(final News news) {
+        BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
+
+
+            @Override
+            public void execute() {
+                try {
+                    DetailActivity_.super.checkHasCollected(news);
+                } catch (Throwable e) {
+                    Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
+                }
+            }
+
+        }
+        );
     }
 
     public static class IntentBuilder_ {

@@ -9,7 +9,7 @@ import me.risky.jlike.base.BaseFragment;
 import me.risky.jlike.base.OnItemClickListener;
 import me.risky.jlike.bean.WelfareDetail;
 import me.risky.jlike.controller.NewsDetailController;
-import me.risky.jlike.dao.WelfareDao;
+import me.risky.jlike.service.WelfareService;
 import me.risky.library.function.AsyncHttp;
 
 import org.androidannotations.annotations.AfterViews;
@@ -18,6 +18,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.apache.http.Header;
 
 import android.content.Intent;
 import android.util.Log;
@@ -43,7 +44,7 @@ public class NewsDetailFragment extends BaseFragment{
 	ImageView reLoadImage;
 	
 	@Bean 
-	WelfareDao welfareDao;
+	WelfareService welfareDao;
 //	@Bean
 	NewsDetailController controller;
 	
@@ -81,6 +82,14 @@ public class NewsDetailFragment extends BaseFragment{
 		    	Log.d(TAG, "get response");
 		    	parseResponse(response);
 		    }
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+					Throwable throwable) {
+				Log.d(TAG, "http error : " + throwable.getMessage());
+				loadFinish();
+			}
+		    
 		});
 	}
 	

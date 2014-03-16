@@ -34,6 +34,13 @@ public class NewsListAdapter<T> extends BaseAdapter {
 	public void addList(List<T> list) {
 		this.list.addAll(list);
 	}
+	
+	public void addList(List<T> list, boolean isClean) {
+		if(isClean){
+			this.list.clear();
+		}
+		this.list.addAll(list);
+	}
 
 	public void clearList() {
 		this.list.clear();

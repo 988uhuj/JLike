@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -17,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import me.risky.jlike.R.id;
 import me.risky.jlike.R.layout;
+import org.androidannotations.api.BackgroundExecutor;
 import org.androidannotations.api.view.HasViews;
 import org.androidannotations.api.view.OnViewChangedListener;
 import org.androidannotations.api.view.OnViewChangedNotifier;
@@ -28,6 +31,7 @@ public final class ImageActivity_
 {
 
     private final OnViewChangedNotifier onViewChangedNotifier_ = new OnViewChangedNotifier();
+    private Handler handler_ = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,14 +75,46 @@ public final class ImageActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        progressBar = ((ProgressBar) hasViews.findViewById(id.loading));
-        titleTV = ((TextView) hasViews.findViewById(id.title));
         imageView = ((ImageView) hasViews.findViewById(id.image));
         typeTV = ((TextView) hasViews.findViewById(id.type));
-        backBtn = ((ImageView) hasViews.findViewById(id.back));
-        downLoadBtn = ((ImageView) hasViews.findViewById(id.download));
         gifImageView = ((GifImageView) hasViews.findViewById(id.gifImage));
+        progressBar = ((ProgressBar) hasViews.findViewById(id.loading));
+        downLoadBtn = ((ImageView) hasViews.findViewById(id.download));
+        titleTV = ((TextView) hasViews.findViewById(id.title));
+        backBtn = ((ImageView) hasViews.findViewById(id.back));
         afterInject();
+    }
+
+    @Override
+    public void toast(final boolean result) {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                ImageActivity_.super.toast(result);
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void downloadImg() {
+        BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
+
+
+            @Override
+            public void execute() {
+                try {
+                    ImageActivity_.super.downloadImg();
+                } catch (Throwable e) {
+                    Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
+                }
+            }
+
+        }
+        );
     }
 
     public static class IntentBuilder_ {

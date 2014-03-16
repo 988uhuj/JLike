@@ -3,12 +3,16 @@ package me.risky.jlike.activity;
 import java.io.IOException;
 
 import me.risky.jlike.R;
-import me.risky.jlike.base.BaseActivity;
+import me.risky.jlike.base.BaseNoTitleActivity;
+import me.risky.library.base.FileUtil;
 import me.risky.library.base.ImageUtil;
+import me.risky.library.base.StringUtil;
 import me.risky.library.function.AsyncHttp;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.WindowFeature;
 import org.apache.http.Header;
@@ -31,7 +35,7 @@ import com.loopj.android.http.BinaryHttpResponseHandler;
 
 @WindowFeature(value = { Window.FEATURE_NO_TITLE })
 @EActivity(R.layout.activity_image_page)
-public class ImageActivity extends BaseActivity {
+public class ImageActivity extends BaseNoTitleActivity {
 	
 	private final static String TAG = "ImageActivity";
 
@@ -55,6 +59,9 @@ public class ImageActivity extends BaseActivity {
 	TextView titleTV;
 	
 	PhotoViewAttacher attacher;
+	
+	private Bitmap bmp;
+	private byte[] bytes;
 
 	@AfterViews
 	void afterInject(){ 
@@ -77,24 +84,43 @@ public class ImageActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				gifImageView.setDrawingCacheEnabled(true);	//注锟斤拷锟斤拷锟斤拷true锟斤拷锟斤拷false
-//				if(FileUtil.writeSDcard(URL, imageView.getDrawingCache())){
-//					Toast.makeText(getApplicationContext(), "锟斤拷锟斤拷晒锟�, Toast.LENGTH_SHORT).show();
-//				}else{
-//					Toast.makeText(getApplicationContext(), "锟斤拷锟斤拷失锟斤拷", Toast.LENGTH_SHORT).show();
-//				}
-				gifImageView.setDrawingCacheEnabled(false);
+				downloadImg();
 			}
 		});
 		
 		attacher = new PhotoViewAttacher(imageView);
 		load();
 	}
+	@Background
+	void downloadImg(){
+		String fileName = StringUtil.toNormalString(URL);
+		boolean result = false;
+		if(ImageUtil.isGIF(URL)){
+			result = FileUtil.writeSDcard(fileName, bytes);
+		}else{
+			result = FileUtil.writeSDcard(fileName, bmp);
+		}
+		toast(result);
+	}
+	
+	@UiThread
+	void toast(boolean result){
+		if(result){
+			Toast.makeText(getApplicationContext(), "保存图片成功", Toast.LENGTH_SHORT).show();
+		}else{
+			Toast.makeText(getApplicationContext(), "保存失败", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 	
 	private void load(){
 		Log.d(TAG, "URL = " + URL);
 		String[] allowedTypes = new String[] { "image/gif", "image/png", "image/jpeg" };	// need
 		AsyncHttp.get(URL, new BinaryHttpResponseHandler(allowedTypes) {
+
+			
+
+			
 
 			@Override
 			public void onSuccess(byte[] binaryData) {
@@ -102,6 +128,7 @@ public class ImageActivity extends BaseActivity {
 				if(ImageUtil.isGIF(URL)){
 					Log.d(TAG, "load gif");
 					try {
+						bytes = binaryData;
 						GifDrawable gifFromBytes = new GifDrawable( binaryData );
 						Log.d(TAG, "load success");
 						gifImageView.setImageDrawable(gifFromBytes);
@@ -112,7 +139,7 @@ public class ImageActivity extends BaseActivity {
 					}
 				}else{
 					Log.d(TAG, "load other");
-					Bitmap bmp = BitmapFactory.decodeByteArray(binaryData, 0, binaryData.length);
+					bmp = BitmapFactory.decodeByteArray(binaryData, 0, binaryData.length);
 					imageView.setImageBitmap(bmp);
 					gifImageView.setVisibility(View.GONE);
 					attacher.update();

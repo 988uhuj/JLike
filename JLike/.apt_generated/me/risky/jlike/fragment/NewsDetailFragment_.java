@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import me.risky.jlike.R.layout;
 import me.risky.jlike.bean.WelfareDetail;
-import me.risky.jlike.dao.WelfareDao_;
+import me.risky.jlike.service.WelfareService_;
 import org.androidannotations.api.BackgroundExecutor;
 import org.androidannotations.api.view.HasViews;
 import org.androidannotations.api.view.OnViewChangedListener;
@@ -58,7 +58,7 @@ public final class NewsDetailFragment_
 
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
-        welfareDao = WelfareDao_.getInstance_(getActivity());
+        welfareDao = WelfareService_.getInstance_(getActivity());
     }
 
     @Override
@@ -73,24 +73,10 @@ public final class NewsDetailFragment_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        progressBar = ((ProgressBar) hasViews.findViewById(me.risky.jlike.R.id.progressBar));
         listview = ((ListView) hasViews.findViewById(me.risky.jlike.R.id.listview));
+        progressBar = ((ProgressBar) hasViews.findViewById(me.risky.jlike.R.id.progressBar));
         reLoadImage = ((ImageView) hasViews.findViewById(me.risky.jlike.R.id.reLoadImage));
         afterInject();
-    }
-
-    @Override
-    public void loadSuccess(final List<WelfareDetail> list) {
-        handler_.post(new Runnable() {
-
-
-            @Override
-            public void run() {
-                NewsDetailFragment_.super.loadSuccess(list);
-            }
-
-        }
-        );
     }
 
     @Override
@@ -101,6 +87,20 @@ public final class NewsDetailFragment_
             @Override
             public void run() {
                 NewsDetailFragment_.super.loadFinish();
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void loadSuccess(final List<WelfareDetail> list) {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                NewsDetailFragment_.super.loadSuccess(list);
             }
 
         }

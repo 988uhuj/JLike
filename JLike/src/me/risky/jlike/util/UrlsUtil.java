@@ -49,4 +49,19 @@ public class UrlsUtil {
 		}
 		return baseUrl + "/page/" + page;
 	}
+	
+	public static int getNewsType(String baseUrl){
+		if(baseUrl.equals(NEWS_LIST_URL_1)){
+			return Constants.DEF_NEWS_TYPE.TYPE1;
+		}else if(baseUrl.equals(NEWS_LIST_URL_2)){
+			return Constants.DEF_NEWS_TYPE.TYPE2;
+		}else if(baseUrl.equals(NEWS_LIST_URL_3)){
+			return Constants.DEF_NEWS_TYPE.TYPE3;
+		}else if(baseUrl.equals(NEWS_LIST_URL_4)){
+			return Constants.DEF_NEWS_TYPE.TYPE4;
+		}else if(baseUrl.equals(NEWS_LIST_URL_5)){
+			return Constants.DEF_NEWS_TYPE.TYPE5;
+		}
+		return 0;
+	}
 }

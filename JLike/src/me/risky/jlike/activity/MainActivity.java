@@ -3,31 +3,27 @@ package me.risky.jlike.activity;
 import java.util.Arrays;
 
 import me.risky.jlike.R;
-import me.risky.jlike.adapter.MenuListAdapter.OnMenuItemSelectListener;
-import me.risky.jlike.base.AbsBaseItemController;
 import me.risky.jlike.base.BaseFragmentActivity;
-import me.risky.jlike.bean.WelfareItem;
 import me.risky.jlike.controller.NewsItemController;
-import me.risky.jlike.fragment.MenuListFragment;
 import me.risky.jlike.fragment.NewsViewPagerFragment;
 import me.risky.jlike.util.UrlsUtil;
 
 import org.androidannotations.annotations.EActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 @EActivity
 public class MainActivity extends BaseFragmentActivity{
 
+	private final static String TAG = "MainActivity";
 	
 //	private SlidingMenu menu;
 	
@@ -165,8 +161,14 @@ public class MainActivity extends BaseFragmentActivity{
 		case android.R.id.home:
 //			menu.toggle();
 			break;
-//		case R.id.action_bar_setting:
-//			Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
+		case R.id.action_star:
+			Log.d(TAG, "action bar star");
+			startActivityAnim(new Intent(this, CollectionActivity_.class));
+			break;
+		case R.id.action_about:
+			Log.d(TAG, "action bar about");
+			startActivityAnim(new Intent(this, AboutActivity_.class));
+			break;
 		default:
 			break;
 		}

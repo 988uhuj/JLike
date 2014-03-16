@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import me.risky.jlike.R.layout;
 import me.risky.jlike.bean.Page_;
-import me.risky.jlike.bean.WelfareItem;
-import me.risky.jlike.dao.WelfareDao_;
+import me.risky.jlike.db.News;
+import me.risky.jlike.service.WelfareService_;
 import me.risky.jlike.ui.LoadListView;
 import org.androidannotations.api.BackgroundExecutor;
 import org.androidannotations.api.view.HasViews;
@@ -58,7 +58,7 @@ public final class NewsListFragment_
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
         page = Page_.getInstance_(getActivity());
-        welfareDao = WelfareDao_.getInstance_(getActivity());
+        welfareDao = WelfareService_.getInstance_(getActivity());
     }
 
     @Override
@@ -78,13 +78,13 @@ public final class NewsListFragment_
     }
 
     @Override
-    public void loadSuccess(final List<WelfareItem> list) {
+    public void loadFromDBFinish(final List<News> list) {
         handler_.post(new Runnable() {
 
 
             @Override
             public void run() {
-                NewsListFragment_.super.loadSuccess(list);
+                NewsListFragment_.super.loadFromDBFinish(list);
             }
 
         }
@@ -106,14 +106,46 @@ public final class NewsListFragment_
     }
 
     @Override
-    public void parseResponse(final String response) {
+    public void loadSuccess(final List<News> list, final boolean isClean) {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                NewsListFragment_.super.loadSuccess(list, isClean);
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void parseResponse(final String response, final boolean isClean) {
         BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
 
 
             @Override
             public void execute() {
                 try {
-                    NewsListFragment_.super.parseResponse(response);
+                    NewsListFragment_.super.parseResponse(response, isClean);
+                } catch (Throwable e) {
+                    Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
+                }
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void loadFromDB() {
+        BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
+
+
+            @Override
+            public void execute() {
+                try {
+                    NewsListFragment_.super.loadFromDB();
                 } catch (Throwable e) {
                     Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
                 }

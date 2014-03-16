@@ -17,6 +17,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 public class LoadListView extends PullToRefreshListView{
 	private String TAG = "LoadListView";
 	private boolean isLoading;
+	private boolean enableAutoLoad;
 	
 	private OnLoadListener listener;
 	
@@ -40,6 +41,7 @@ public class LoadListView extends PullToRefreshListView{
 	}
 
 	private void init(Context c){
+		enableAutoLoad = true;
 		listview = this.getRefreshableView();
 		listview.setOnScrollListener(new OnScrollListener() {
 			
@@ -47,7 +49,7 @@ public class LoadListView extends PullToRefreshListView{
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
 				Log.d(TAG, view.getLastVisiblePosition() + "position");
 				// Loading data when last position is showing;
-				if (view.getLastVisiblePosition() == view.getCount() - 1) {
+				if (view.getLastVisiblePosition() == view.getCount() - 1 && enableAutoLoad) {
 					startLoad();
 				}
 				
@@ -76,7 +78,9 @@ public class LoadListView extends PullToRefreshListView{
 			
 			@Override
 			public void onClick(View arg0) {
-				startLoad();
+				if(enableAutoLoad){
+					startLoad();
+				}
 			}
 		});
 	}
@@ -138,6 +142,10 @@ public class LoadListView extends PullToRefreshListView{
 	// 设置记录的位置
 	public void setSelectionFromTop(){
 		listview.setSelectionFromTop(scrollPos, scrollTop);
+	}
+	
+	public void setEnableAutoLoad(boolean isEnableAutoLoad){
+		this.enableAutoLoad = isEnableAutoLoad;
 	}
 	
 }

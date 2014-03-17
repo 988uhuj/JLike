@@ -57,8 +57,8 @@ public final class NewsListFragment_
 
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
-        page = Page_.getInstance_(getActivity());
         welfareDao = WelfareService_.getInstance_(getActivity());
+        page = Page_.getInstance_(getActivity());
     }
 
     @Override
@@ -78,13 +78,13 @@ public final class NewsListFragment_
     }
 
     @Override
-    public void loadFromDBFinish(final List<News> list) {
+    public void loadSuccess(final List<News> list, final boolean isClean) {
         handler_.post(new Runnable() {
 
 
             @Override
             public void run() {
-                NewsListFragment_.super.loadFromDBFinish(list);
+                NewsListFragment_.super.loadSuccess(list, isClean);
             }
 
         }
@@ -106,13 +106,13 @@ public final class NewsListFragment_
     }
 
     @Override
-    public void loadSuccess(final List<News> list, final boolean isClean) {
+    public void loadFromDBFinish(final List<News> list) {
         handler_.post(new Runnable() {
 
 
             @Override
             public void run() {
-                NewsListFragment_.super.loadSuccess(list, isClean);
+                NewsListFragment_.super.loadFromDBFinish(list);
             }
 
         }

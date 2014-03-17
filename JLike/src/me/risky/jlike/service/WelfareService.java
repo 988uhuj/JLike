@@ -114,6 +114,11 @@ public class WelfareService {
 				}
 				
 				// Content
+//				Elements as = p.getElementsByTag("a");
+//				for(int b = 0; b < as.size(); b++){
+//					Element blockquote = as.get(b);
+//					blockquote.tagName("click");
+//				}
 				String contentP = p.html();
 				
 				// set

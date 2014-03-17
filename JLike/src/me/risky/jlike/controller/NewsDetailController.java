@@ -5,19 +5,26 @@ import me.risky.jlike.base.AbsBaseItemController;
 import me.risky.jlike.base.ImageLoaderHelper;
 import me.risky.jlike.base.OnItemClickListener;
 import me.risky.jlike.bean.MyTagHandler;
+import me.risky.jlike.bean.MyTagHandler.OnLinkClickListener;
 import me.risky.jlike.bean.WelfareDetail;
 import me.risky.jlike.util.Constants;
 import me.risky.library.base.ImageUtil;
 
 import org.androidannotations.annotations.EBean;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -91,9 +98,25 @@ public class NewsDetailController extends AbsBaseItemController{
 			case Constants.DEF_WELFARE_DETAIL.CONTENT:
 				holder.textView.setMovementMethod(LinkMovementMethod.getInstance());
 				holder.textView.setText(Html.fromHtml(detail.getContent(), null, new MyTagHandler()));
+				
+				//设置超链接点击事件
+				CharSequence text = holder.textView.getText();
+				if (text instanceof Spannable) {  
+		            int end = text.length();
+		            Spannable sp = (Spannable) text;  
+		            URLSpan[] spans = sp.getSpans(0, end, URLSpan.class);  
+		            SpannableStringBuilder style = new SpannableStringBuilder(text);  
+		            style.clearSpans();// should clear old spans  
+		            for (URLSpan span : spans) {  
+		            	MyTagHandler.MyClickableSpan mySpan = new MyTagHandler().new MyClickableSpan(span.getURL());
+		            	mySpan.setOnClickListener(onLinkClickListener);
+		                style.setSpan(mySpan, sp.getSpanStart(span), sp.getSpanEnd(span), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);  
+		            }  
+		            holder.textView.setText(style); 
+		        }
 				break;
 			case Constants.DEF_WELFARE_DETAIL.TAG:
-				holder.textView.setText(detail.getTag());
+				holder.textView.setText(Html.fromHtml(detail.getTag(), null, new MyTagHandler()));
 				break;
 			default:
 				break;
@@ -146,5 +169,11 @@ public class NewsDetailController extends AbsBaseItemController{
 	public void setOnItemClickListener(OnItemClickListener<WelfareDetail> onClickListener){
 		this.onClickListener = onClickListener;
 	}
-
+	
+	private OnLinkClickListener onLinkClickListener;
+	
+	public void setOnLinkClickListener(OnLinkClickListener onLinkClickListener){
+		this.onLinkClickListener = onLinkClickListener;
+	}
+	
 }

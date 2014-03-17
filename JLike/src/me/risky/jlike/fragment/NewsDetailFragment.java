@@ -4,9 +4,13 @@ import java.util.List;
 
 import me.risky.jlike.R;
 import me.risky.jlike.activity.ImageActivity_;
+import me.risky.jlike.activity.WebViewActivity;
+import me.risky.jlike.activity.WebViewActivity_;
 import me.risky.jlike.adapter.NewsListAdapter;
 import me.risky.jlike.base.BaseFragment;
+import me.risky.jlike.base.BaseFragmentActivity;
 import me.risky.jlike.base.OnItemClickListener;
+import me.risky.jlike.bean.MyTagHandler.OnLinkClickListener;
 import me.risky.jlike.bean.WelfareDetail;
 import me.risky.jlike.controller.NewsDetailController;
 import me.risky.jlike.service.WelfareService;
@@ -62,6 +66,14 @@ public class NewsDetailFragment extends BaseFragment{
 				@Override
 				public void onItemClick(int position, WelfareDetail item) {
 					toImageActvity(item.getImgSrc());
+				}
+			});
+			
+			controller.setOnLinkClickListener(new OnLinkClickListener() {
+				
+				@Override
+				public void onClick(View v, String url) {
+					toWebViewActivity(url);
 				}
 			});
 		}
@@ -131,6 +143,13 @@ public class NewsDetailFragment extends BaseFragment{
 		i.putExtra("title", adapter.getList().get(0).getTitle());
 		getActivity().startActivity(i);
 		getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_no);
+	}
+	
+	private void toWebViewActivity(String url){
+		Intent i = new Intent();
+		i.setClass(getActivity(), WebViewActivity_.class);
+		i.putExtra("url", url);
+		((BaseFragmentActivity)getActivity()).startActivityAnim(i);
 	}
 	
 	//----------------

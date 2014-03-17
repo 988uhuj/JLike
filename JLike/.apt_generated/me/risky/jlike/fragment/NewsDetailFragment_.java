@@ -73,24 +73,10 @@ public final class NewsDetailFragment_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        listview = ((ListView) hasViews.findViewById(me.risky.jlike.R.id.listview));
         progressBar = ((ProgressBar) hasViews.findViewById(me.risky.jlike.R.id.progressBar));
+        listview = ((ListView) hasViews.findViewById(me.risky.jlike.R.id.listview));
         reLoadImage = ((ImageView) hasViews.findViewById(me.risky.jlike.R.id.reLoadImage));
         afterInject();
-    }
-
-    @Override
-    public void loadFinish() {
-        handler_.post(new Runnable() {
-
-
-            @Override
-            public void run() {
-                NewsDetailFragment_.super.loadFinish();
-            }
-
-        }
-        );
     }
 
     @Override
@@ -115,6 +101,20 @@ public final class NewsDetailFragment_
             @Override
             public void run() {
                 NewsDetailFragment_.super.loadError();
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void loadFinish() {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                NewsDetailFragment_.super.loadFinish();
             }
 
         }

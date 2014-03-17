@@ -84,20 +84,6 @@ public final class DetailActivity_
     }
 
     @Override
-    public void checkHasCollectedFinish() {
-        handler_.post(new Runnable() {
-
-
-            @Override
-            public void run() {
-                DetailActivity_.super.checkHasCollectedFinish();
-            }
-
-        }
-        );
-    }
-
-    @Override
     public void saveCollectFinish() {
         handler_.post(new Runnable() {
 
@@ -105,6 +91,20 @@ public final class DetailActivity_
             @Override
             public void run() {
                 DetailActivity_.super.saveCollectFinish();
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void checkHasCollectedFinish() {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                DetailActivity_.super.checkHasCollectedFinish();
             }
 
         }

@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.Window;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.umeng.analytics.MobclickAgent;
 
 @WindowFeature(value = { Window.FEATURE_NO_TITLE })
 @EActivity(R.layout.activity_boot)
@@ -37,8 +38,9 @@ public class BootActivity extends BaseNoTitleActivity{
 	
 	@AfterInject
 	void afterInject(){
+		MobclickAgent.onEvent(this, "onBoot");
+		
 		logic();
-//		sendMsg();
 		delay();
 	}
 	
@@ -55,7 +57,6 @@ public class BootActivity extends BaseNoTitleActivity{
 	@UiThread
 	void toActivity(){
 		toMainActivity();
-		sendNotification();
 		finish();
 	}
 	

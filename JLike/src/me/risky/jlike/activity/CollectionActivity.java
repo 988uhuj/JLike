@@ -31,6 +31,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.umeng.analytics.MobclickAgent;
 
 @EActivity(R.layout.activity_collection)
 public class CollectionActivity extends BaseActivity{
@@ -47,6 +48,7 @@ public class CollectionActivity extends BaseActivity{
 	
 	@AfterViews
 	void afterView(){
+		MobclickAgent.onEvent(this, "onCollection");
 		setTitle("极客-收藏");
 		if(adapter == null){
 			adapter = new NewsListAdapter<Collection>(this);

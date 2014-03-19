@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.BinaryHttpResponseHandler;
+import com.umeng.analytics.MobclickAgent;
 
 @WindowFeature(value = { Window.FEATURE_NO_TITLE })
 @EActivity(R.layout.activity_image_page)
@@ -65,6 +66,8 @@ public class ImageActivity extends BaseNoTitleActivity {
 
 	@AfterViews
 	void afterInject(){ 
+		MobclickAgent.onEvent(this, "onImage");
+		
 		URL = getIntent().getStringExtra("url");
 		title = getIntent().getStringExtra("title");
 		

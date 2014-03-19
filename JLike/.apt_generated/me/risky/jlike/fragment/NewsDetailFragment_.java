@@ -73,9 +73,9 @@ public final class NewsDetailFragment_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        progressBar = ((ProgressBar) hasViews.findViewById(me.risky.jlike.R.id.progressBar));
-        listview = ((ListView) hasViews.findViewById(me.risky.jlike.R.id.listview));
         reLoadImage = ((ImageView) hasViews.findViewById(me.risky.jlike.R.id.reLoadImage));
+        listview = ((ListView) hasViews.findViewById(me.risky.jlike.R.id.listview));
+        progressBar = ((ProgressBar) hasViews.findViewById(me.risky.jlike.R.id.progressBar));
         afterInject();
     }
 

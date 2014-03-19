@@ -19,6 +19,8 @@ import android.util.Log;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 @EActivity
 public class MainActivity extends BaseFragmentActivity{
@@ -35,9 +37,8 @@ public class MainActivity extends BaseFragmentActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		MobclickAgent.onEvent(this, "onMain");
 		setContentView(R.layout.activity_main);
-		
 		setDisplayHomeAsUpEnabled(false);
 		
 		findView();
@@ -45,6 +46,10 @@ public class MainActivity extends BaseFragmentActivity{
 		initComponent();
 		
 		action();
+		
+		// 友盟自动更新
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(getApplicationContext());
 	}
 	
 	
@@ -183,6 +188,8 @@ public class MainActivity extends BaseFragmentActivity{
         inflater.inflate(R.menu.main, menu);  
         return true;  
 	}
+	
+	
 	private void switchFragment(Fragment fragment) {
 		
 		getSupportFragmentManager()

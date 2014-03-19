@@ -78,20 +78,6 @@ public final class NewsListFragment_
     }
 
     @Override
-    public void loadSuccess(final List<News> list, final boolean isClean) {
-        handler_.post(new Runnable() {
-
-
-            @Override
-            public void run() {
-                NewsListFragment_.super.loadSuccess(list, isClean);
-            }
-
-        }
-        );
-    }
-
-    @Override
     public void loadError() {
         handler_.post(new Runnable() {
 
@@ -120,17 +106,13 @@ public final class NewsListFragment_
     }
 
     @Override
-    public void parseResponse(final String response, final boolean isClean) {
-        BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
+    public void loadSuccess(final List<News> list, final boolean isClean) {
+        handler_.post(new Runnable() {
 
 
             @Override
-            public void execute() {
-                try {
-                    NewsListFragment_.super.parseResponse(response, isClean);
-                } catch (Throwable e) {
-                    Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                }
+            public void run() {
+                NewsListFragment_.super.loadSuccess(list, isClean);
             }
 
         }
@@ -146,6 +128,24 @@ public final class NewsListFragment_
             public void execute() {
                 try {
                     NewsListFragment_.super.loadFromDB();
+                } catch (Throwable e) {
+                    Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
+                }
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void parseResponse(final String response, final boolean isClean) {
+        BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
+
+
+            @Override
+            public void execute() {
+                try {
+                    NewsListFragment_.super.parseResponse(response, isClean);
                 } catch (Throwable e) {
                     Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
                 }

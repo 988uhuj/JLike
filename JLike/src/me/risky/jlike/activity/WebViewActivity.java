@@ -7,6 +7,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 
 import android.graphics.Bitmap;
 import android.view.KeyEvent;
@@ -23,6 +24,8 @@ public class WebViewActivity extends BaseActivity{
 	
 	@AfterViews
 	void afterViews(){
+		MobclickAgent.onEvent(this, "onWebview");
+		
 		baseUrl = getIntent().getStringExtra("url");
 		
 		webView = (WebView) findViewById(R.id.webview);

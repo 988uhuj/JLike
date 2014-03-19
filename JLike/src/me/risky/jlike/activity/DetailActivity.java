@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 
 @EActivity(R.layout.activity_detail)
 public class DetailActivity extends BaseFragmentActivity{
@@ -40,6 +41,7 @@ public class DetailActivity extends BaseFragmentActivity{
 	
 	@AfterViews
 	void afterView(){
+		MobclickAgent.onEvent(this, "onDetail");
 		setTitle("极客-详情");
 		
 		hasCollected = true;

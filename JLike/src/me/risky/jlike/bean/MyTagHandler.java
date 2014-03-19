@@ -11,12 +11,11 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 /**
  * 标签Handler，筛选出标签内容
  * 
- * @author Dave
+ * @author chenupt
  * 
  */
 public class MyTagHandler implements TagHandler {

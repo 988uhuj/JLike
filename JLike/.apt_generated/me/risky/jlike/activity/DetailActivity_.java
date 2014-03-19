@@ -112,14 +112,14 @@ public final class DetailActivity_
     }
 
     @Override
-    public void saveCollect() {
+    public void checkHasCollected(final News news) {
         BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
 
 
             @Override
             public void execute() {
                 try {
-                    DetailActivity_.super.saveCollect();
+                    DetailActivity_.super.checkHasCollected(news);
                 } catch (Throwable e) {
                     Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
                 }
@@ -130,14 +130,14 @@ public final class DetailActivity_
     }
 
     @Override
-    public void checkHasCollected(final News news) {
+    public void saveCollect() {
         BackgroundExecutor.execute(new BackgroundExecutor.Task("", 0, "") {
 
 
             @Override
             public void execute() {
                 try {
-                    DetailActivity_.super.checkHasCollected(news);
+                    DetailActivity_.super.saveCollect();
                 } catch (Throwable e) {
                     Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
                 }

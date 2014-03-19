@@ -8,6 +8,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ public class AboutActivity extends BaseActivity{
 	
 	@AfterViews
 	void afterView(){
+		MobclickAgent.onEvent(this, "onAbout");
 		setTitle("极客-关于");
 		updateBtn.setVisibility(View.INVISIBLE);
 	}

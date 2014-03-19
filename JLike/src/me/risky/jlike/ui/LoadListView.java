@@ -2,6 +2,8 @@ package me.risky.jlike.ui;
 
 import me.risky.jlike.R;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -113,7 +115,9 @@ public class LoadListView extends PullToRefreshListView{
 		isLoading = true;
 		footTextView.setText(R.string.refresh_list_loading);
 		progressBar.setVisibility(View.VISIBLE);
-		listener.onLoad();
+		// 延迟刷新
+//		listener.onLoad();
+		handler.sendEmptyMessageDelayed(0, 500);
 	}
 	
 	public void stopLoad(){
@@ -148,4 +152,14 @@ public class LoadListView extends PullToRefreshListView{
 		this.enableAutoLoad = isEnableAutoLoad;
 	}
 	
+	
+	public Handler handler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			listener.onLoad();
+			super.handleMessage(msg);
+		}
+		
+	};
 }
